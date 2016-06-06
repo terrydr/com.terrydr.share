@@ -10,6 +10,8 @@
 
 @interface TerrydrShare : CDVPlugin
 
+- (void)registerAppId:(CDVInvokedUrlCommand*)command;
 - (void)terrydrQQShare:(CDVInvokedUrlCommand*)command;
+- (void)terrydrWeixinShare:(CDVInvokedUrlCommand*)command;
 
 @end
