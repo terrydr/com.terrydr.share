@@ -31,10 +31,10 @@
     NSArray *paramArr = command.arguments;
     NSString *shareTitle = [paramArr objectAtIndex:0];
     NSString *shareDes = [paramArr objectAtIndex:1];
-    //NSString *shareImg = [paramArr objectAtIndex:2];
+    NSString *shareImgPath = [paramArr objectAtIndex:2];
     NSString *shareUrl = [paramArr objectAtIndex:3];
     
-    [self shareQQMessageWithTitle:shareTitle shareDes:shareDes shareUrl:shareUrl];
+    [self shareQQMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl];
 }
 
 - (void)terrydrWeixinShare:(CDVInvokedUrlCommand*)command{
@@ -42,17 +42,16 @@
     NSArray *paramArr = command.arguments;
     NSString *shareTitle = [paramArr objectAtIndex:0];
     NSString *shareDes = [paramArr objectAtIndex:1];
-    //NSString *shareImg = [paramArr objectAtIndex:2];
+    NSString *shareImgPath = [paramArr objectAtIndex:2];
     NSString *shareUrl = [paramArr objectAtIndex:3];
     
-    [self shareWeinxinMessageWithTitle:shareTitle shareDes:shareDes shareUrl:shareUrl];
+    [self shareWeinxinMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl];
 }
 
-- (void)shareQQMessageWithTitle:(NSString *)title shareDes:(NSString *)des shareUrl:(NSString *)urlStr{
+- (void)shareQQMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr{
     if ([QQApiInterface isQQInstalled]) {
         if ([QQApiInterface isQQSupportApi]) {
-            NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"news.jpg"];
-            NSData* data = [NSData dataWithContentsOfFile:path];
+            NSData* data = [NSData dataWithContentsOfFile:imgPath];
             NSURL* url = [NSURL URLWithString:urlStr];
             
             QQApiNewsObject* img = [QQApiNewsObject objectWithURL:url title:title description:des previewImageData:data];
@@ -66,13 +65,14 @@
     }
 }
 
-- (void)shareWeinxinMessageWithTitle:(NSString *)title shareDes:(NSString *)des shareUrl:(NSString *)urlStr{
+- (void)shareWeinxinMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr{
     if ([WXApi isWXAppInstalled]) {
         if ([WXApi isWXAppSupportApi]) {
             WXMediaMessage *message = [WXMediaMessage message];
             message.title = title;
             message.description = des;
-            [message setThumbImage:[UIImage imageNamed:@"res2.png"]];
+            NSData* data = [NSData dataWithContentsOfFile:imgPath];
+            [message setThumbImage:[UIImage imageWithData:data]];
             
             WXWebpageObject *ext = [WXWebpageObject object];
             ext.webpageUrl = urlStr;
