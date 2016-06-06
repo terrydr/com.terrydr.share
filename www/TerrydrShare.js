@@ -31,7 +31,7 @@ terrydrWeixinShare: function(title,descirption,imagePath,url,successCallback, er
                  successCallback,
                  errorCallback,
                  "TerrydrShare",
-                 "shareWeinxinMessage",
+                 "terrydrWeixinShare",
                  [title,descirption,imagePath,url]
                  );
     
