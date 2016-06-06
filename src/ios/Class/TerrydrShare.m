@@ -20,9 +20,13 @@
 
 @implementation TerrydrShare
 
-- (void)registerAppId{
-    [WXApi registerApp:@"wx81f40406b3c59044"];
-    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1105336069"
+- (void)registerAppId:(CDVInvokedUrlCommand*)command{
+    NSArray *paramArr = command.arguments;
+    NSString *wxAppId = [paramArr objectAtIndex:0];
+    NSString *qqAppId = [paramArr objectAtIndex:1];
+    
+    [WXApi registerApp:wxAppId];
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:qqAppId
                                             andDelegate:nil];
 }
 
