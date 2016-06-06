@@ -1,38 +1,38 @@
 var tdShare = {
-terrydrShareRegister: function(successCallback, errorCallback) {
+terrydrShareRegister: function(wxAppId,qqAppId,successCallback, errorCallback) {
     console.log("terrydrShareRegister");
     cordova.exec(
                  successCallback,
                  errorCallback,
                  "TerrydrShare",
                  "registerAppId",
-                 []
+                 [wxAppId,qqAppId]
                  );
     
 }
     ,
     
-terrydrQQShare: function(successCallback, errorCallback) {
+terrydrQQShare: function(title,descirption,imagePath,url,successCallback, errorCallback) {
     console.log("terrydrQQShare");
     cordova.exec(
                  successCallback,
                  errorCallback,
                  "TerrydrShare",
                  "terrydrQQShare",
-                 []
+                 [title,descirption,imagePath,url]
                  );
     
 }
     ,
  
-terrydrWeixinShare: function(successCallback, errorCallback) {
+terrydrWeixinShare: function(title,descirption,imagePath,url,successCallback, errorCallback) {
     console.log("terrydrWeixinShare");
     cordova.exec(
                  successCallback,
                  errorCallback,
                  "TerrydrShare",
                  "shareWeinxinMessage",
-                 []
+                 [title,descirption,imagePath,url]
                  );
     
 }
@@ -40,4 +40,4 @@ terrydrWeixinShare: function(successCallback, errorCallback) {
 }
 
 
-module.exports = tdShare;
+module.exports = jrCamera;
