@@ -60,14 +60,14 @@
             [QQApiInterface sendReq:req];
         }
     }else{
-        
+        //0:未安装
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"0"];
+        [self.commandDelegate sendPluginResult:result callbackId:_callbackId];
     }
 }
 
 - (void)shareWeinxinMessageWithTitle:(NSString *)title shareDes:(NSString *)des shareUrl:(NSString *)urlStr{
     if ([WXApi isWXAppInstalled]) {
-        
-    }else{
         if ([WXApi isWXAppSupportApi]) {
             WXMediaMessage *message = [WXMediaMessage message];
             message.title = title;
@@ -86,6 +86,10 @@
             
             [WXApi sendReq:req];
         }
+    }else{
+        //0:未安装
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"0"];
+        [self.commandDelegate sendPluginResult:result callbackId:_callbackId];
     }
 }
 
