@@ -55,7 +55,7 @@
 - (void)shareQQMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr{
     if ([QQApiInterface isQQInstalled]) {
         if ([QQApiInterface isQQSupportApi]) {
-            NSData* data = [NSData dataWithContentsOfFile:imgPath];
+            NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgPath]];
             NSURL* url = [NSURL URLWithString:urlStr];
             
             QQApiNewsObject* img = [QQApiNewsObject objectWithURL:url title:title description:des previewImageData:data];
@@ -75,7 +75,7 @@
             WXMediaMessage *message = [WXMediaMessage message];
             message.title = title;
             message.description = des;
-            NSData* data = [NSData dataWithContentsOfFile:imgPath];
+            NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgPath]];
             [message setThumbImage:[UIImage imageWithData:data]];
             
             WXWebpageObject *ext = [WXWebpageObject object];
