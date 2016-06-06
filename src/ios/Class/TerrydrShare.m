@@ -21,8 +21,8 @@
 @implementation TerrydrShare
 
 - (void)registerAppId{
-    [WXApi registerApp:@"wx1f505150fdaa042e"];
-    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1105372473"
+    [WXApi registerApp:@"wx81f40406b3c59044"];
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1105336069"
                                             andDelegate:nil];
 }
 
