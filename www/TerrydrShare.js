@@ -40,4 +40,4 @@ terrydrWeixinShare: function(successCallback, errorCallback) {
 }
 
 
-module.exports = jrCamera;
+module.exports = tdShare;
