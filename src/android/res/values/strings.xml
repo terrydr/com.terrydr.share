@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sharing</string>
+    <string name="hello_world">分享测试!</string>
+    <string name="action_settings">Settings</string>
+    <string name="shareWXFriend">分享微信好友</string>
+    <string name="shareWXMoments">分享微信朋友圈</string>
+    <string name="shareQQ">分享QQ好友</string>
+    <string name="shareQQZone">分享QQ空间</string>
+
+</resources>
