@@ -33,6 +33,8 @@ public class WXEntryActivity extends WXCallbackActivity {
         	finish();
             //分享拒绝  
             break;  
+        default:
+            finish();
         }  
     }  
     
