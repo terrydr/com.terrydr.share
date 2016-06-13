@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -22,7 +23,10 @@ import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -37,16 +41,16 @@ public class Share_plugin_intent extends CordovaPlugin {
 	private static final int SHARE_MAIL_CODE = 1002;
 
 	public String APP_ID ;
-	public String APP_SECRET ;
+//	public String APP_SECRET ;
 
 	public String QQ_APP_ID ;
-	public String QQ_APP_KEY ;
+//	public String QQ_APP_KEY ;
 	
 //	public static final String APP_ID = "wx81f40406b3c59044";
-//	public static final String APP_SECRET = "9b444a462359330cc77fafc36910cf12";
+	public static final String APP_SECRET = "9b444a462359330cc77fafc36910cf12";
 //
 //	public static final String QQ_APP_ID = "1105336069";
-//	public static final String QQ_APP_KEY = "xS2EmpHKqD2cVH8";
+	public static final String QQ_APP_KEY = "xS2EmpHKqD2cVH8";
 	
 	final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 	// 设置分享内容
@@ -86,6 +90,12 @@ public class Share_plugin_intent extends CordovaPlugin {
 			LOG.e(TAG, "descirption:" + descirption);
 			LOG.e(TAG, "imagePath:" + imagePath);
 			LOG.e(TAG, "url:" + url);
+			boolean isWeiXin = isWeixinAvilible(cordova.getActivity());
+			if(!isWeiXin){
+				LOG.e(TAG, "isWeiXin:" + false);
+				callbackContext.success(0);
+				return true;
+			}
 			this.shareWXFriend(title,descirption,imagePath,url);
 			return true;
 		}else if(action.equals("terrydrQQShare")){    //分享QQ好友
@@ -97,9 +107,16 @@ public class Share_plugin_intent extends CordovaPlugin {
 			LOG.e(TAG, "descirption:" + descirption);
 			LOG.e(TAG, "imagePath:" + imagePath);
 			LOG.e(TAG, "url:" + url);
+			boolean isQQ = isQQClientAvailable(cordova.getActivity());
+			if(!isQQ){
+				LOG.e(TAG, "qq:" + false);
+				callbackContext.success(0);
+				return true;
+			}
 			this.shareQQ(title,descirption,imagePath,url);
+			return true;
 		}
-		callbackContext.error("error");  
+//		callbackContext.error("error");  
         return false; 
 	}
 
@@ -129,6 +146,8 @@ public class Share_plugin_intent extends CordovaPlugin {
 	        qqShareContent.setShareMedia(localImage);
 	        qqShareContent.setTargetUrl(url);
 	        mController.setShareMedia(qqShareContent);
+	        
+//	        UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.WEIXIN)  
 			clickShare(true, SHARE_MEDIA.QQ);
 		}
 		
@@ -210,11 +229,11 @@ public class Share_plugin_intent extends CordovaPlugin {
 	     */
 	    private void configPlatfrom(String appid,String qq_app_id){
 	        // 微信
-	        UMWXHandler wxHandler = new UMWXHandler(cordova.getActivity(), appid, null);
+	        UMWXHandler wxHandler = new UMWXHandler(cordova.getActivity(), appid, APP_SECRET);
 	        wxHandler.addToSocialSDK();
 	    	
 	        // QQ
-	        UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(cordova.getActivity(), qq_app_id,null);
+	        UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(cordova.getActivity(), qq_app_id,QQ_APP_KEY);
 	        qqSsoHandler.addToSocialSDK();
 	        
 	        // QQ空间
@@ -288,4 +307,39 @@ public class Share_plugin_intent extends CordovaPlugin {
 			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}
 	}
+	
+	public static boolean isWeixinAvilible(Context context) {
+        final PackageManager packageManager = context.getPackageManager();// 获取packagemanager
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equals("com.tencent.mm")) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 判断qq是否可用
+     * 
+     * @param context
+     * @return
+     */
+    public static boolean isQQClientAvailable(Context context) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equals("com.tencent.mobileqq")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
