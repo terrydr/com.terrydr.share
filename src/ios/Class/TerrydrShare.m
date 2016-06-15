@@ -76,7 +76,9 @@
             message.title = title;
             message.description = des;
             NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgPath]];
-            [message setThumbImage:[UIImage imageWithData:data]];
+            UIImage *originImage = [UIImage imageWithData:data];
+            NSData *shareData = UIImageJPEGRepresentation(originImage, 0.5f);
+            [message setThumbImage:[UIImage imageWithData:shareData]];
             
             WXWebpageObject *ext = [WXWebpageObject object];
             ext.webpageUrl = urlStr;
