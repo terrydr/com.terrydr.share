@@ -77,8 +77,8 @@
             message.description = des;
             NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgPath]];
             UIImage *originImage = [UIImage imageWithData:data];
-            NSData *shareData = UIImageJPEGRepresentation(originImage, 0.5f);
-            [message setThumbImage:[UIImage imageWithData:shareData]];
+            UIImage *shareImage = [self compressImage:originImage toMaxFileSize:26*1024];
+            [message setThumbImage:shareImage];
             
             WXWebpageObject *ext = [WXWebpageObject object];
             ext.webpageUrl = urlStr;
@@ -97,6 +97,19 @@
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"0"];
         [self.commandDelegate sendPluginResult:result callbackId:_callbackId];
     }
+}
+
+- (UIImage *)compressImage:(UIImage *)image toMaxFileSize:(NSInteger)maxFileSize {
+    CGFloat compression = 0.9f;
+    CGFloat maxCompression = 0.1f;
+    NSData *imageData = UIImageJPEGRepresentation(image, compression);
+    while ([imageData length] > maxFileSize && compression > maxCompression) {
+        compression -= 0.1;
+        imageData = UIImageJPEGRepresentation(image, compression);
+    }
+    
+    UIImage *compressedImage = [UIImage imageWithData:imageData];
+    return compressedImage;
 }
 
 @end
