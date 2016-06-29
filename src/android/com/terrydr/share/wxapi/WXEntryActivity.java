@@ -1,4 +1,4 @@
-package com.terrydr.eyeScope.wxapi;
+package com.terrydr.share.wxapi;
 
 import android.widget.Toast;
 import com.tencent.mm.sdk.modelbase.BaseReq;
