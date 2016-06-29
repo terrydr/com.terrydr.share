@@ -1,6 +1,6 @@
-# com.terrydr.share
+# cordova-plugin-terrydrShare
 
-插件名称：com.terrydr.share
+插件名称：cordova-plugin-terrydrShare
 
 功能描述：微信,QQ分享
 
@@ -10,7 +10,7 @@
 
 安装：cordova plugin add https://github.com/terrydr/com.terrydr.share.git
 
-卸载：cordova plugin rm com.terrydr.share
+卸载：cordova plugin rm cordova-plugin-terrydrShare
 
 示例：
 
