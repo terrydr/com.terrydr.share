@@ -9,6 +9,7 @@ cordova-plugin-terrydrShare
 卸载：cordova plugin rm cordova-plugin-terrydrShare
 
 示例：
+
     //分享插件初始化 微信key  qqkey app初始化调用
     tdShare.terrydrShareRegister("wx81f40406b3c59044", "1105336069"); 
 
