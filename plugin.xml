@@ -3,16 +3,16 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-terrydrShare"
-    version="0.4.2">
+    version="0.0.1">
     
     <name>TerrydrShare</name>
     
-    <description>This plugin for Cordova and PhoneGap allows you to check if an app is installed. It requires an URI Scheme (iOS) or a Package Name (Android).</description>
+    <description>This plugin for Cordova</description>
     
-    <keywords>Cordova,PhoneGap,plugin,app,availability,installed, URIScheme,URI,Scheme,PackageName,Package,Name,iOS,Android</keywords>
+    <keywords>Cordova</keywords>
     
-    <repo>https://github.com/ohh2ahh/AppAvailability.git</repo>
-    <issue>https://github.com/ohh2ahh/AppAvailability/issues</issue>
+    <repo>https://github.com/terrydr/com.terrydr.share.git</repo>
+    <issue>https://github.com/terrydr/com.terrydr.share.git</issue>
     
     <license>MIT</license>
     
@@ -51,7 +51,7 @@
         <config-file  target="res/xml/config.xml" parent="/*">
             <feature  name="TerrydrShare">
                 <!--JREye:继承CDVPlugin的类名 -->
-                <param  name="android-package"  value="com.terrydr.eyeScope.Share_plugin_intent"/>
+                <param  name="android-package"  value="com.terrydr.share.Share_plugin_intent"/>
             </feature>
         </config-file>
 		 <config-file target="AndroidManifest.xml" parent="/*">
@@ -134,10 +134,12 @@
 		<source-file src="src/android/libs/umeng-analytics-v5.5.3.jar"
                      target-dir="libs"/>						 
 
-		<source-file src="src/android/com/terrydr/eyeScope/Share_plugin_intent.java"
-                     target-dir="src/com/terrydr/eyeScope"/>					 
-		<source-file src="src/android/com/terrydr/eyeScope/wxapi/WXEntryActivity.java"
-                     target-dir="src/com/terrydr/eyeScope/wxapi"/>					 
+		<source-file src="src/android/com/terrydr/share/Share_plugin_intent.java"
+                     target-dir="src/com/terrydr/share"/>					 
+		<source-file src="src/android/com/terrydr/share/wxapi/WXEntryActivity.java"
+                     target-dir="src/com/terrydr/share/wxapi"/>	
+		<source-file src="src/android/assets/img/notimg.jpg"
+                     target-dir="assets/img"/>					 
 
 		<source-file src="src/android/res/anim/umeng_socialize_fade_in.xml" target-dir="res/anim"/>
 		<source-file src="src/android/res/anim/umeng_socialize_fade_out.xml" target-dir="res/anim"/>

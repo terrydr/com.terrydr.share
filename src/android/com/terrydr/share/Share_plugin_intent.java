@@ -1,5 +1,6 @@
-package com.terrydr.eyeScope;
+package com.terrydr.share;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -144,7 +145,6 @@ public class Share_plugin_intent extends CordovaPlugin {
 	        qqShareContent.setTargetUrl(url);
 	        mController.setShareMedia(qqShareContent);
 	        
-//	        UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.WEIXIN)  
 			clickShare(true, SHARE_MEDIA.QQ);
 		}
 		
@@ -153,20 +153,27 @@ public class Share_plugin_intent extends CordovaPlugin {
 		 * @return Bitmap
 		 * 根据图片url获取图片对象
 		 */
-		public static Bitmap getBitMBitmap(String urlpath) {
-			Bitmap map = null;
-			try {
+	public Bitmap getBitMBitmap(String urlpath) {
+		Bitmap map = null;
+		InputStream in;
+		try {
+			if (urlpath == null || "".equals(urlpath)) {
+				String notImgPath = "img" + File.separator + "notimg.jpg";
+				in = cordova.getActivity().getResources().getAssets()
+						.open(notImgPath);
+			} else {
 				URL url = new URL(urlpath);
 				URLConnection conn = url.openConnection();
 				conn.connect();
-				InputStream in = conn.getInputStream();
-				map = BitmapFactory.decodeStream(in);
-			} catch (IOException e) {
-				e.printStackTrace();
-				LOG.e(TAG, "IOException:" + e);
+				in = conn.getInputStream();
 			}
-			return map;
+			map = BitmapFactory.decodeStream(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+			LOG.e(TAG, "IOException:" + e);
 		}
+		return map;
+	}
 //	    /**
 //		 * 分享微信朋友圈
 //		 */
