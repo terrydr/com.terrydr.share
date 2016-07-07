@@ -77,7 +77,7 @@
             message.description = des;
             NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgPath]];
             UIImage *originImage = [UIImage imageWithData:data];
-            UIImage *shareImage = [self compressImage:originImage toMaxFileSize:20*1024];
+            UIImage *shareImage = [self compressImage:originImage toMaxFileSize:8*1024];
             [message setThumbImage:shareImage];
             
             WXWebpageObject *ext = [WXWebpageObject object];
