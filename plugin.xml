@@ -89,7 +89,7 @@
                 android:value="538d940056240b96d810268a">
         </meta-data>
         <activity
-            android:name="com.terrydr.eyeScope.wxapi.WXEntryActivity"
+            android:name="com.terrydr.share.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
