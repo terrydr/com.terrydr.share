@@ -9,8 +9,7 @@ terrydrShareRegister: function(wxAppId,qqAppId,successCallback, errorCallback) {
                  [wxAppId,qqAppId]
                  );
     
-}
-    ,
+},
     
 terrydrQQShare: function(title,descirption,imagePath,url,successCallback, errorCallback) {
     console.log("terrydrQQShare");
@@ -22,8 +21,19 @@ terrydrQQShare: function(title,descirption,imagePath,url,successCallback, errorC
                  [title,descirption,imagePath,url]
                  );
     
-}
-    ,
+},
+
+terrydrQZoneShare: function(title,descirption,imagePath,url,successCallback, errorCallback) {
+    console.log("terrydrQZoneShare");
+    cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 "TerrydrShare",
+                 "terrydrQZoneShare",
+                 [title,descirption,imagePath,url]
+                 );
+    
+},
  
 terrydrWeixinShare: function(title,descirption,imagePath,url,successCallback, errorCallback) {
     console.log("terrydrWeixinShare");
@@ -32,6 +42,18 @@ terrydrWeixinShare: function(title,descirption,imagePath,url,successCallback, er
                  errorCallback,
                  "TerrydrShare",
                  "terrydrWeixinShare",
+                 [title,descirption,imagePath,url]
+                 );
+    
+},
+
+terrydrWeixinCircleShare: function(title,descirption,imagePath,url,successCallback, errorCallback) {
+    console.log("terrydrWeixinCircleShare");
+    cordova.exec(
+                 successCallback,
+                 errorCallback,
+                 "TerrydrShare",
+                 "terrydrWeixinCircleShare",
                  [title,descirption,imagePath,url]
                  );
     
