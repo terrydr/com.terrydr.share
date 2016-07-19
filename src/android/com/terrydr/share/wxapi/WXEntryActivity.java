@@ -20,16 +20,16 @@ public class WXEntryActivity extends WXCallbackActivity {
         switch (resp.errCode) {  
         case BaseResp.ErrCode.ERR_OK:  
             //分享成功  
-        	Toast.makeText(this, "分享成功", Toast.LENGTH_LONG).show();  
+//        	Toast.makeText(this, "分享成功", Toast.LENGTH_LONG).show();  
         	finish();
             break;  
         case BaseResp.ErrCode.ERR_USER_CANCEL:  
-        	Toast.makeText(this, "分享取消 ", Toast.LENGTH_LONG).show();  
+//        	Toast.makeText(this, "分享取消 ", Toast.LENGTH_LONG).show();  
         	finish();
             //分享取消  
             break;  
         case BaseResp.ErrCode.ERR_AUTH_DENIED:  
-        	Toast.makeText(this, "分享拒绝", Toast.LENGTH_LONG).show();  
+//        	Toast.makeText(this, "分享拒绝", Toast.LENGTH_LONG).show();  
         	finish();
             //分享拒绝  
             break;  

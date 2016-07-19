@@ -140,7 +140,8 @@ public class Share_plugin_intent extends CordovaPlugin {
 		qqSsoHandler.addToSocialSDK();
 
 		// QQ空间
-		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(cordova.getActivity(), qq_app_id, QQ_APP_KEY);
+		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(cordova.getActivity(), 
+				qq_app_id, QQ_APP_KEY);
 		qZoneSsoHandler.addToSocialSDK();
 
 	}
@@ -285,6 +286,7 @@ public class Share_plugin_intent extends CordovaPlugin {
 	 *            分享平台
 	 */
 	private void clickShare(boolean isDirectShare, SHARE_MEDIA platform) {
+		mController.getConfig().closeToast();
 		if (isDirectShare) {
 			// 调用直接分享
 			mController.directShare(cordova.getActivity(), platform,
@@ -310,12 +312,12 @@ public class Share_plugin_intent extends CordovaPlugin {
 				SocializeEntity entity) {
 			if (stCode == 200) {
 				Log.e(TAG, "分享成功");
-				Toast.makeText(cordova.getActivity(), "分享成功",
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(cordova.getActivity(), "分享成功",
+//						Toast.LENGTH_SHORT).show();
 			} else {
 				Log.e(TAG, "分享失败");
-				Toast.makeText(cordova.getActivity(), "分享失败",
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(cordova.getActivity(), "分享失败",
+//						Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
@@ -327,8 +329,8 @@ public class Share_plugin_intent extends CordovaPlugin {
 			return;
 		}
 		if (requestCode == SHARE_MAIL_CODE || requestCode == SHARE_SMS_CODE) {
-			Toast.makeText(cordova.getActivity(), "分享成功", Toast.LENGTH_SHORT)
-					.show();
+//			Toast.makeText(cordova.getActivity(), "分享成功", Toast.LENGTH_SHORT)
+//					.show();
 			return;
 		}
 		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(
