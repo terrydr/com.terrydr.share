@@ -12,6 +12,8 @@
 
 - (void)registerAppId:(CDVInvokedUrlCommand*)command;
 - (void)terrydrQQShare:(CDVInvokedUrlCommand*)command;
+- (void)terrydrQZoneShare:(CDVInvokedUrlCommand*)command;
 - (void)terrydrWeixinShare:(CDVInvokedUrlCommand*)command;
+- (void)terrydrWeixinCircleShare:(CDVInvokedUrlCommand*)command;
 
 @end

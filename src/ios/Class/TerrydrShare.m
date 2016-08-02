@@ -41,6 +41,17 @@
     [self shareQQMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl];
 }
 
+- (void)terrydrQZoneShare:(CDVInvokedUrlCommand*)command{
+    _callbackId = command.callbackId;
+    NSArray *paramArr = command.arguments;
+    NSString *shareTitle = [paramArr objectAtIndex:0];
+    NSString *shareDes = [paramArr objectAtIndex:1];
+    NSString *shareImgPath = [paramArr objectAtIndex:2];
+    NSString *shareUrl = [paramArr objectAtIndex:3];
+    
+    [self shareQQMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl];
+}
+
 - (void)terrydrWeixinShare:(CDVInvokedUrlCommand*)command{
     _callbackId = command.callbackId;
     NSArray *paramArr = command.arguments;
@@ -49,7 +60,18 @@
     NSString *shareImgPath = [paramArr objectAtIndex:2];
     NSString *shareUrl = [paramArr objectAtIndex:3];
     
-    [self shareWeinxinMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl];
+    [self shareWeinxinMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl shareType:WXSceneSession];
+}
+
+- (void)terrydrWeixinCircleShare:(CDVInvokedUrlCommand*)command{
+    _callbackId = command.callbackId;
+    NSArray *paramArr = command.arguments;
+    NSString *shareTitle = [paramArr objectAtIndex:0];
+    NSString *shareDes = [paramArr objectAtIndex:1];
+    NSString *shareImgPath = [paramArr objectAtIndex:2];
+    NSString *shareUrl = [paramArr objectAtIndex:3];
+    
+    [self shareWeinxinMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl shareType:WXSceneTimeline];
 }
 
 - (void)shareQQMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr{
@@ -69,7 +91,7 @@
     }
 }
 
-- (void)shareWeinxinMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr{
+- (void)shareWeinxinMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr shareType:(int)scene{
     if ([WXApi isWXAppInstalled]) {
         if ([WXApi isWXAppSupportApi]) {
             WXMediaMessage *message = [WXMediaMessage message];
@@ -88,7 +110,7 @@
             SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
             req.bText = NO;
             req.message = message;
-            req.scene = WXSceneSession;
+            req.scene = scene;
             
             [WXApi sendReq:req];
         }
