@@ -38,7 +38,7 @@
     NSString *shareImgPath = [paramArr objectAtIndex:2];
     NSString *shareUrl = [paramArr objectAtIndex:3];
     
-    [self shareQQMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl];
+    [self shareQQMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl shareType:@"qq"];
 }
 
 - (void)terrydrQZoneShare:(CDVInvokedUrlCommand*)command{
@@ -49,7 +49,7 @@
     NSString *shareImgPath = [paramArr objectAtIndex:2];
     NSString *shareUrl = [paramArr objectAtIndex:3];
     
-    [self shareQQMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl];
+    [self shareQQMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl shareType:@"zone"];
 }
 
 - (void)terrydrWeixinShare:(CDVInvokedUrlCommand*)command{
@@ -74,7 +74,7 @@
     [self shareWeinxinMessageWithTitle:shareTitle shareDes:shareDes imagePath:shareImgPath shareUrl:shareUrl shareType:WXSceneTimeline];
 }
 
-- (void)shareQQMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr{
+- (void)shareQQMessageWithTitle:(NSString *)title shareDes:(NSString *)des imagePath:(NSString *)imgPath shareUrl:(NSString *)urlStr shareType:(NSString *)type{
     if ([QQApiInterface isQQInstalled]) {
         if ([QQApiInterface isQQSupportApi]) {
             NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgPath]];
@@ -82,7 +82,11 @@
             
             QQApiNewsObject* img = [QQApiNewsObject objectWithURL:url title:title description:des previewImageData:data];
             SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
-            [QQApiInterface sendReq:req];
+            if ([type isEqualToString:@"qq"]) {
+                [QQApiInterface sendReq:req];
+            }else{
+                [QQApiInterface SendReqToQZone:req];
+            }
         }
     }else{
         //0:未安装
